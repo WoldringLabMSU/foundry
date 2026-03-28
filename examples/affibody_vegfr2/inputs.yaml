@@ -30,18 +30,9 @@ affibody_vegfr2_conservative:
   # Interface residues on the affibody that contact VEGFR2 (≤5 Å cutoff).
   select_unfixed_sequence: "A6,A9,A10,A13-14,A17,A24-25,A27-28,A31,A35-36"
 
-  # ── VEGFR2 hotspot atoms to guide binder placement ───────────────────────
-  # Atoms on VEGFR2 that the designed affibody should come within ~4.5 Å of.
-  # Update residue numbers to match the hotspot residues in your VEGFR2 chain.
-  # Typical VEGFR2 D2 domain hotspots (renumber as needed):
-  select_hotspots:
-    B13: "CG1,CG2"
-    B15: "CG,CZ"
-    B43: "CG,CZ"
-    B75: "CG,SD"
-    B89: "CD1,CG2"
-    B91: "CG1,CG2"
-    B187: "CG,CD1"
+  # ── VEGFR2 hotspot residues to guide binder placement ────────────────────
+  # VEGFR2 chain B residues that contact the affibody interface.
+  select_hotspots: "B131-135,B137,B164-165,B193-197,B213,B215-218,B253-257,B276,B286,B310-312"
 
   # ── Partial diffusion settings ────────────────────────────────────────────
   # 5.0 Å is conservative — mostly side-chain remodelling with slight backbone
@@ -70,14 +61,7 @@ affibody_vegfr2_moderate:
 
   select_unfixed_sequence: "A6,A9,A10,A13-14,A17,A24-25,A27-28,A31,A35-36"
 
-  select_hotspots:
-    B13: "CG1,CG2"
-    B15: "CG,CZ"
-    B43: "CG,CZ"
-    B75: "CG,SD"
-    B89: "CD1,CG2"
-    B91: "CG1,CG2"
-    B187: "CG,CD1"
+  select_hotspots: "B131-135,B137,B164-165,B193-197,B213,B215-218,B253-257,B276,B286,B310-312"
 
   # Higher noise = more backbone exploration around the interface
   partial_t: 10.0
@@ -101,14 +85,7 @@ affibody_vegfr2_aggressive:
   select_fixed_atoms:
     B1-200: ALL
 
-  select_hotspots:
-    B13: "CG1,CG2"
-    B15: "CG,CZ"
-    B43: "CG,CZ"
-    B75: "CG,SD"
-    B89: "CD1,CG2"
-    B91: "CG1,CG2"
-    B187: "CG,CD1"
+  select_hotspots: "B131-135,B137,B164-165,B193-197,B213,B215-218,B253-257,B276,B286,B310-312"
 
   # Total length stays near original 58 + 200 = 258 residues
   length: "255-262"
