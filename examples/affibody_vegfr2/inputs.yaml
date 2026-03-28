@@ -17,13 +17,13 @@ affibody_vegfr2_conservative:
 
   # Keep both chains; chain break (/0) between affibody and VEGFR2.
   # Adjust B residue range to match your VEGFR2 domain length.
-  contig: "A1-58,/0,B1-200"
+  contig: "A1-58,/0,B1-766"
 
   # ── What to fix in 3-D space ──────────────────────────────────────────────
   # Fix VEGFR2 all-atom coordinates completely; fix affibody backbone only.
   # (affibody side chains at interface positions will be diffused via partial_t)
   select_fixed_atoms:
-    B1-200: ALL       # Fix all VEGFR2 atoms — adjust range to match your structure
+    B1-766: ALL       # Fix all VEGFR2 atoms
     A1-58: BKBN       # Fix affibody backbone (N, CA, C, O) — sidechains float
 
   # ── Where sequence redesign is allowed ───────────────────────────────────
@@ -53,10 +53,10 @@ affibody_vegfr2_conservative:
 affibody_vegfr2_moderate:
   input: /mnt/home/woldring/foundry/examples/affibody_vegfr2/model.cif
 
-  contig: "A1-58,/0,B1-200"
+  contig: "A1-58,/0,B1-766"
 
   select_fixed_atoms:
-    B1-200: ALL
+    B1-766: ALL
     A1-58: BKBN
 
   select_unfixed_sequence: "A6,A9,A10,A13-14,A17,A24-25,A27-28,A31,A35-36"
@@ -79,16 +79,16 @@ affibody_vegfr2_aggressive:
 
   # Designed region replaces affibody with new backbone of the same length.
   # /0 chain break separates it from the fixed VEGFR2.
-  contig: "55-62,/0,B1-200"
+  contig: "55-62,/0,B1-766"
 
   # Only fix VEGFR2; affibody backbone is fully diffused
   select_fixed_atoms:
-    B1-200: ALL
+    B1-766: ALL
 
   select_hotspots: "B131-135,B137,B164-165,B193-197,B213,B215-218,B253-257,B276,B286,B310-312"
 
   # Total length stays near original 58 + 200 = 258 residues
-  length: "255-262"
+  length: "821-828"
 
   infer_ori_strategy: hotspots
   plddt_enhanced: true
