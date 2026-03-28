@@ -4,17 +4,6 @@
 #       partially diffusing the affibody chain while keeping VEGFR2 fixed,
 #       then allowing RFD3 to redesign side chains at the binding interface.
 #
-# SETUP INSTRUCTIONS:
-#   1. Set `input` to the path of your starting affibody-VEGFR2 complex PDB.
-#      Expected chain assignment:
-#        Chain A — affibody (58 residues, A1–A58)
-#        Chain B — VEGFR2 target domain
-#   2. Adjust `select_unfixed_sequence` to list the interface residues on the
-#      affibody you want to redesign (see notes below).
-#   3. Adjust `select_hotspots` to point at key VEGFR2 contact atoms.
-#   4. Tune `partial_t` to control how much backbone exploration to allow
-#      (recommended starting range: 5.0–15.0 Å; lower = more conservative).
-#
 # RUN (from the foundry repo root):
 #   rfd3 design \
 #     out_dir=examples/affibody_vegfr2/outputs \
@@ -24,7 +13,7 @@
 
 # ── Conservative run: small noise, redesign only interface side chains ────────
 affibody_vegfr2_conservative:
-  input: /path/to/your/affibody_vegfr2_complex.pdb   # <-- UPDATE THIS
+  input: /mnt/home/woldring/foundry/examples/affibody_vegfr2/model.cif
 
   # Keep both chains; chain break (/0) between affibody and VEGFR2.
   # Adjust B residue range to match your VEGFR2 domain length.
@@ -38,19 +27,8 @@ affibody_vegfr2_conservative:
     A1-58: BKBN       # Fix affibody backbone (N, CA, C, O) — sidechains float
 
   # ── Where sequence redesign is allowed ───────────────────────────────────
-  # List the affibody residues at the binding interface.
-  # These are the positions that make contacts with VEGFR2 and will have their
-  # amino-acid identity optimised by the model.
-  #
-  # For a typical three-helix-bundle affibody the interface spans helix-1 and
-  # helix-2.  Common contact positions (renumber to match your structure):
-  #   Helix-1 face:  A9,  A10, A11, A13, A14, A17, A18
-  #   Helix-2 face:  A24, A25, A27, A28, A32, A35
-  #
-  # Replace the residue numbers below with the actual interface positions
-  # identified from your starting complex (e.g. by PyMOL contact analysis
-  # or a distance cutoff of 4–5 Å to VEGFR2 heavy atoms).
-  select_unfixed_sequence: "A9,A10,A11,A13,A14,A17,A18,A24,A25,A27,A28,A32,A35"
+  # Interface residues on the affibody that contact VEGFR2 (≤5 Å cutoff).
+  select_unfixed_sequence: "A6,A9,A10,A13-14,A17,A24-25,A27-28,A31,A35-36"
 
   # ── VEGFR2 hotspot atoms to guide binder placement ───────────────────────
   # Atoms on VEGFR2 that the designed affibody should come within ~4.5 Å of.
@@ -82,7 +60,7 @@ affibody_vegfr2_conservative:
 
 # ── Moderate run: more backbone freedom, useful for larger conformational change
 affibody_vegfr2_moderate:
-  input: /path/to/your/affibody_vegfr2_complex.pdb   # <-- UPDATE THIS
+  input: /mnt/home/woldring/foundry/examples/affibody_vegfr2/model.cif
 
   contig: "A1-58,/0,B1-200"
 
@@ -90,7 +68,7 @@ affibody_vegfr2_moderate:
     B1-200: ALL
     A1-58: BKBN
 
-  select_unfixed_sequence: "A9,A10,A11,A13,A14,A17,A18,A24,A25,A27,A28,A32,A35"
+  select_unfixed_sequence: "A6,A9,A10,A13-14,A17,A24-25,A27-28,A31,A35-36"
 
   select_hotspots:
     B13: "CG1,CG2"
@@ -113,7 +91,7 @@ affibody_vegfr2_moderate:
 # Useful if the affibody backbone needs to repack significantly.
 # Note: removes the fixed-backbone constraint on the affibody.
 affibody_vegfr2_aggressive:
-  input: /path/to/your/affibody_vegfr2_complex.pdb   # <-- UPDATE THIS
+  input: /mnt/home/woldring/foundry/examples/affibody_vegfr2/model.cif
 
   # Designed region replaces affibody with new backbone of the same length.
   # /0 chain break separates it from the fixed VEGFR2.
