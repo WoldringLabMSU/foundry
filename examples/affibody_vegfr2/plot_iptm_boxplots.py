@@ -63,16 +63,15 @@ def plot_boxplots(data: dict, out_path: str):
         patch.set_facecolor(colour)
         patch.set_alpha(0.7)
 
-    # Reference line at ipTM = 0.75 (good binding threshold)
-    ax.axhline(0.75, color="red", linestyle="--", linewidth=1.2,
-               label="ipTM = 0.75 (good binding threshold)")
+    # Reference line at ipTM = 0.75
+    ax.axhline(0.75, color="red", linestyle="--", linewidth=1.2)
 
     ax.set_xticks(range(1, len(labels) + 1))
     ax.set_xticklabels(labels, fontsize=11)
     ax.set_ylabel("ipTM", fontsize=12)
     ax.set_title("ipTM Distributions Across Affibody Design Targets", fontsize=13)
     ax.set_ylim(0, 1)
-    ax.legend(fontsize=9, loc="lower right")
+
     ax.yaxis.grid(True, linestyle="--", alpha=0.5)
     ax.set_axisbelow(True)
 
