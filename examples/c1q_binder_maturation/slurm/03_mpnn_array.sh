@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1
-#SBATCH --partition=gpu
+#SBATCH --partition=general-long-gpu
 #SBATCH --array=0-7   # <-- set to (n_workers - 1); each worker processes 1/N of pass_list
 
 # ── Update these paths ────────────────────────────────────────────────────────
@@ -17,6 +17,8 @@ CONDA_ENV=foundry_clean
 # ─────────────────────────────────────────────────────────────────────────────
 
 source ~/.bashrc
+conda deactivate
+conda deactivate
 conda activate $CONDA_ENV
 export PYTHONNOUSERSITE=1
 unset PYTHONPATH

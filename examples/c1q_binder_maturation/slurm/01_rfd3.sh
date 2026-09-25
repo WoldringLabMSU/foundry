@@ -7,7 +7,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=64G
 #SBATCH --gres=gpu:1
-#SBATCH --partition=gpu
+#SBATCH --partition=general-long-gpu
 
 # ── Update these paths ────────────────────────────────────────────────────────
 SCRATCH=/mnt/scratch/woldring
@@ -16,6 +16,8 @@ CONDA_ENV=foundry_clean
 # ─────────────────────────────────────────────────────────────────────────────
 
 source ~/.bashrc
+conda deactivate
+conda deactivate
 conda activate $CONDA_ENV
 export PYTHONNOUSERSITE=1
 unset PYTHONPATH

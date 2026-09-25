@@ -22,6 +22,8 @@ C1QC_FASTA=/path/to/c1qc.fasta         # <-- UPDATE (FASTA for C1qC chain)
 # ─────────────────────────────────────────────────────────────────────────────
 
 source ~/.bashrc
+conda deactivate
+conda deactivate
 conda activate $CONDA_ENV
 export PYTHONNOUSERSITE=1
 unset PYTHONPATH
