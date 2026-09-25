@@ -16,9 +16,9 @@
 SCRATCH=/mnt/scratch/woldring
 FOUNDRY_DIR=/mnt/scratch/woldring/foundry
 CONDA_ENV=foundry_clean
-C1QA_FASTA=/path/to/c1qa.fasta         # <-- UPDATE (FASTA for C1qA chain)
-C1QB_FASTA=/path/to/c1qb.fasta         # <-- UPDATE (FASTA for C1qB chain)
-C1QC_FASTA=/path/to/c1qc.fasta         # <-- UPDATE (FASTA for C1qC chain)
+C1QA_FASTA=/mnt/scratch/woldring/foundry/examples/c1q_binder_maturation/C1qA.fasta        # <-- UPDATE (FASTA for C1qA chain)
+C1QB_FASTA=/mnt/scratch/woldring/foundry/examples/c1q_binder_maturation/C1qB.fasta        # <-- UPDATE (FASTA for C1qB chain)
+C1QC_FASTA=/mnt/scratch/woldring/foundry/examples/c1q_binder_maturation/C1qC.fasta        # <-- UPDATE (FASTA for C1qC chain)
 # ─────────────────────────────────────────────────────────────────────────────
 
 source ~/.bashrc

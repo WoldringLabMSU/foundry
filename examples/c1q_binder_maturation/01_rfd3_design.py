@@ -19,28 +19,30 @@ from rfd3.engine import RFD3InferenceConfig, RFD3InferenceEngine
 from rfd3.inference.input_parsing import DesignInputSpecification
 
 # ── Configuration — update to match your structure ───────────────────────────
-COMPLEX_CIF = "/mnt/scratch/woldring/ptprz1_c1q_complex.cif"   # <-- UPDATE (path to your CIF)
+COMPLEX_CIF = "/mnt/scratch/woldring/foundry/examples/c1q_binder_maturation/fold_ptprz1_cah_ptprz1_model_0.cif"   # <-- UPDATE (path to your CIF)
 
 PTPRZ1_CHAIN = "A"
 C1QA_CHAIN   = "B"
 C1QB_CHAIN   = "C"
 C1QC_CHAIN   = "D"
 
-PTPRZ1_LEN = 500   # <-- UPDATE (run check_chain_lengths.py)
-C1QA_LEN   = 136   # <-- UPDATE
-C1QB_LEN   = 136   # <-- UPDATE
-C1QC_LEN   = 136   # <-- UPDATE
+PTPRZ1_LEN = 265   # <-- UPDATE (run check_chain_lengths.py)
+C1QA_LEN   = 133   # <-- UPDATE
+C1QB_LEN   = 132   # <-- UPDATE
+C1QC_LEN   = 129   # <-- UPDATE
 
 # PTPRZ1 residues at the binding interface with C1q gH
 # (any PTPRZ1 residue with a heavy atom within 5 Å of any C1q atom)
-INTERFACE_RESIDUES = []   # <-- UPDATE e.g. [45, 47, 50, 53, 78, 81]
+INTERFACE_RESIDUES = [97, 98, 99, 100, 101, 102, 169, 222, 223, 226, 229, 230, 232, 233, 243, 244, 245, 247
+]   # <-- UPDATE e.g. [45, 47, 50, 53, 78, 81]
 
 # C1q hotspot residues spanning all three chains (A/B and B/C interface residues
 # that make direct contacts with PTPRZ1 in the starting complex).
 C1Q_HOTSPOTS = (
-    f"{C1QA_CHAIN}<h1>-<h2>,{C1QA_CHAIN}<h3>,"   # <-- UPDATE with real residue numbers
-    f"{C1QB_CHAIN}<h4>-<h5>,{C1QB_CHAIN}<h6>,"
-    f"{C1QC_CHAIN}<h7>,{C1QC_CHAIN}<h8>"
+    f"{C1QA_CHAIN}11,{C1QA_CHAIN}13-15,{C1QA_CHAIN}59,"
+    f"{C1QA_CHAIN}85,{C1QA_CHAIN}87,{C1QA_CHAIN}114-120,"
+    f"{C1QB_CHAIN}61,{C1QB_CHAIN}63,{C1QB_CHAIN}72,"
+    f"{C1QB_CHAIN}75,{C1QB_CHAIN}77,{C1QB_CHAIN}79,{C1QB_CHAIN}106-108"
 )
 
 
