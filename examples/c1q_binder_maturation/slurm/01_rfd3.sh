@@ -10,8 +10,8 @@
 #SBATCH --partition=gpu
 
 # ── Update these paths ────────────────────────────────────────────────────────
-SCRATCH=/mnt/scratch/woldring          # <-- UPDATE to your scratch path
-FOUNDRY_DIR=/mnt/home/woldring/foundry # <-- UPDATE to your foundry dir
+SCRATCH=/mnt/scratch/woldring
+FOUNDRY_DIR=/mnt/scratch/woldring/foundry
 CONDA_ENV=foundry_clean
 # ─────────────────────────────────────────────────────────────────────────────
 

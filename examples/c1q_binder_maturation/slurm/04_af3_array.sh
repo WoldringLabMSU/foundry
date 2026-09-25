@@ -13,8 +13,8 @@
 # See SETUP.md for details.
 
 # ── Update these paths ────────────────────────────────────────────────────────
-SCRATCH=/mnt/scratch/woldring          # <-- UPDATE
-FOUNDRY_DIR=/mnt/home/woldring/foundry # <-- UPDATE
+SCRATCH=/mnt/scratch/woldring
+FOUNDRY_DIR=/mnt/scratch/woldring/foundry
 CONDA_ENV=foundry_clean
 C1QA_FASTA=/path/to/c1qa.fasta         # <-- UPDATE (FASTA for C1qA chain)
 C1QB_FASTA=/path/to/c1qb.fasta         # <-- UPDATE (FASTA for C1qB chain)

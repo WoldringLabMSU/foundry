@@ -19,7 +19,7 @@ from rfd3.engine import RFD3InferenceConfig, RFD3InferenceEngine
 from rfd3.inference.input_parsing import DesignInputSpecification
 
 # ── Configuration — update to match your structure ───────────────────────────
-COMPLEX_CIF = "/path/to/your/ptprz1_c1q_complex.cif"   # <-- UPDATE
+COMPLEX_CIF = "/mnt/scratch/woldring/ptprz1_c1q_complex.cif"   # <-- UPDATE (path to your CIF)
 
 PTPRZ1_CHAIN = "A"
 C1QA_CHAIN   = "B"

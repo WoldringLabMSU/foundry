@@ -8,8 +8,8 @@
 #SBATCH --mem=32G
 
 # ── Update these paths ────────────────────────────────────────────────────────
-SCRATCH=/mnt/scratch/woldring          # <-- UPDATE
-FOUNDRY_DIR=/mnt/home/woldring/foundry # <-- UPDATE
+SCRATCH=/mnt/scratch/woldring
+FOUNDRY_DIR=/mnt/scratch/woldring/foundry
 CONDA_ENV=foundry_clean
 # ─────────────────────────────────────────────────────────────────────────────
 

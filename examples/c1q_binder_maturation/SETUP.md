@@ -17,18 +17,20 @@ heterotrimer (C1qA/B/C) using RFD3 partial diffusion → MPNN → AF3 evaluation
 
 ## Step 0 — Clone and set up
 
+Clone foundry into your scratch directory to avoid filling your 1 GB home quota:
+
 ```bash
 # On the login node:
-cd /mnt/home/woldring
+cd /mnt/scratch/woldring
 git clone https://github.com/WoldringLabMSU/foundry.git
 cd foundry
 git checkout C1q_binder_maturation
 ```
 
-Create the scratch output directory:
+Create the pipeline output directory alongside it:
 
 ```bash
-mkdir -p $SCRATCH/c1q_binder_maturation
+mkdir -p /mnt/scratch/woldring/c1q_binder_maturation
 ```
 
 ---
@@ -49,6 +51,7 @@ To find chain lengths, run:
 conda activate foundry_clean
 export PYTHONNOUSERSITE=1
 unset PYTHONPATH
+cd /mnt/scratch/woldring/foundry
 python examples/c1q_binder_maturation/check_chain_lengths.py \
     --structure /path/to/your/ptprz1_c1q_complex.cif
 ```
@@ -62,8 +65,8 @@ select interface, (chain A) within 5.0 of (chain B or chain C or chain D)
 Then note the residue numbers from the selection.
 
 ### `examples/c1q_binder_maturation/slurm/*.sh`
-- `SCRATCH` — your scratch directory path (e.g. `/mnt/ffs24/home/woldring`)
-- `FOUNDRY_DIR` — path to your foundry checkout
+- `SCRATCH` — set to `/mnt/scratch/woldring`
+- `FOUNDRY_DIR` — set to `/mnt/scratch/woldring/foundry`
 - `C1QA_FASTA`, `C1QB_FASTA`, `C1QC_FASTA` — in `04_af3_array.sh`
 - `--hotspot_residues` — in `02_screen.sh` (format: `B:101-110 C:45-55 D:80-90`)
 
@@ -76,7 +79,7 @@ Submit jobs in order; each step depends on the previous one completing.
 ### Step 1: RFD3 partial diffusion
 
 ```bash
-cd /mnt/home/woldring/foundry
+cd /mnt/scratch/woldring/foundry
 sbatch examples/c1q_binder_maturation/slurm/01_rfd3.sh
 ```
 

@@ -11,8 +11,8 @@
 #SBATCH --array=0-7   # <-- set to (n_workers - 1); each worker processes 1/N of pass_list
 
 # ── Update these paths ────────────────────────────────────────────────────────
-SCRATCH=/mnt/scratch/woldring          # <-- UPDATE
-FOUNDRY_DIR=/mnt/home/woldring/foundry # <-- UPDATE
+SCRATCH=/mnt/scratch/woldring
+FOUNDRY_DIR=/mnt/scratch/woldring/foundry
 CONDA_ENV=foundry_clean
 # ─────────────────────────────────────────────────────────────────────────────
 
