@@ -1,0 +1,105 @@
+# RFdiffusion3 input specification — PTPRZ1 interface maturation vs C1q gH heterotrimer
+#
+# TARGET: C1q globular head domain (gC1q), a genuine heterotrimer of C1qA/B/C.
+#   Do NOT use RFD3 symmetry features — C1q gH has pseudo-threefold geometry
+#   but is a genuine heterotrimer with distinct A/B/C sequences.
+#
+# BINDER: PTPRZ1. We fix the PTPRZ1 backbone and redesign interface side chains,
+#   guided by hotspot residues spanning all three C1q subunits (A/B/C interface).
+#
+# CHAIN ASSIGNMENT (verify against your complex PDB):
+#   Chain A — PTPRZ1      (binder, backbone fixed, interface residues unfixed-seq)
+#   Chain B — C1qA        (fixed ALL)
+#   Chain C — C1qB        (fixed ALL)
+#   Chain D — C1qC        (fixed ALL)
+#
+# UPDATE BEFORE RUNNING:
+#   1. Set `input` to the path of your PTPRZ1–C1q complex structure
+#   2. Update chain lengths (PTPRZ1_LEN, C1QA_LEN, C1QB_LEN, C1QC_LEN)
+#   3. Set PTPRZ1 interface residues in select_unfixed_sequence
+#   4. Set C1q hotspot residues spanning all three chains in select_hotspots
+#
+# RUN (from foundry repo root):
+#   rfd3 design \
+#     out_dir=$SCRATCH/c1q_binder_maturation/rfd3_conservative \
+#     inputs=examples/c1q_binder_maturation/inputs.yaml \
+#     json_keys_subset=c1q_conservative \
+#     n_batches=8 diffusion_batch_size=2
+
+# ── Shared chain lengths — update from your structure ────────────────────────
+# Run: python examples/c1q_binder_maturation/check_chain_lengths.py
+# to print the correct values from your input CIF/PDB.
+
+# ── Conservative: side-chain remodelling, minimal backbone movement ───────────
+c1q_conservative:
+  input: /path/to/your/ptprz1_c1q_complex.cif   # <-- UPDATE
+
+  # Four chains with three chain breaks. Adjust residue ranges to match your structure.
+  contig: "A1-500,/0,B1-136,/0,C1-136,/0,D1-136"
+
+  # Fix all C1q chains; fix PTPRZ1 backbone only (side chains float via partial_t)
+  select_fixed_atoms:
+    B1-136: ALL
+    C1-136: ALL
+    D1-136: ALL
+    A1-500: BKBN
+
+  # PTPRZ1 interface residues that contact C1q gH (identify from your structure,
+  # e.g. any PTPRZ1 residue with a heavy atom within 5 Å of any C1q atom).
+  # Replace the placeholders below with actual residue numbers.
+  select_unfixed_sequence: "A<pos1>,A<pos2>,A<pos3>"   # <-- UPDATE
+
+  # C1q hotspot residues spanning all three chains.
+  # The C1q gH binds ligands at inter-subunit interfaces (A/B, B/C, A/C).
+  # Identify hotspots from the PTPRZ1–C1q structure; typical choices are
+  # residues at the A/B and B/C interfaces that make direct contacts with PTPRZ1.
+  select_hotspots: "B<h1>-<h2>,B<h3>,C<h4>-<h5>,C<h6>,D<h7>,D<h8>"   # <-- UPDATE
+
+  partial_t: 5.0
+  infer_ori_strategy: hotspots
+  plddt_enhanced: true
+  redesign_motif_sidechains: true
+
+
+# ── Moderate: moderate backbone relaxation around interface ───────────────────
+c1q_moderate:
+  input: /path/to/your/ptprz1_c1q_complex.cif   # <-- UPDATE
+
+  contig: "A1-500,/0,B1-136,/0,C1-136,/0,D1-136"
+
+  select_fixed_atoms:
+    B1-136: ALL
+    C1-136: ALL
+    D1-136: ALL
+    A1-500: BKBN
+
+  select_unfixed_sequence: "A<pos1>,A<pos2>,A<pos3>"   # <-- UPDATE
+
+  select_hotspots: "B<h1>-<h2>,B<h3>,C<h4>-<h5>,C<h6>,D<h7>,D<h8>"   # <-- UPDATE
+
+  partial_t: 10.0
+  infer_ori_strategy: hotspots
+  plddt_enhanced: true
+  redesign_motif_sidechains: true
+
+
+# ── Aggressive: larger backbone rearrangements ────────────────────────────────
+c1q_aggressive:
+  input: /path/to/your/ptprz1_c1q_complex.cif   # <-- UPDATE
+
+  contig: "A1-500,/0,B1-136,/0,C1-136,/0,D1-136"
+
+  select_fixed_atoms:
+    B1-136: ALL
+    C1-136: ALL
+    D1-136: ALL
+    A1-500: BKBN
+
+  select_unfixed_sequence: "A<pos1>,A<pos2>,A<pos3>"   # <-- UPDATE
+
+  select_hotspots: "B<h1>-<h2>,B<h3>,C<h4>-<h5>,C<h6>,D<h7>,D<h8>"   # <-- UPDATE
+
+  partial_t: 15.0
+  infer_ori_strategy: hotspots
+  plddt_enhanced: true
+  redesign_motif_sidechains: true
